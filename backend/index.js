@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "helloworld";
 const bcrypt = require("bcrypt");
 
 const userAuthenticate = require("./userauth");
@@ -24,7 +23,7 @@ app.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "Please enter correct credentials", errors: parsedInput.error });
     }
     // if(Users.findOne({email:parsedInput.data.email ,isVerified: false})){
-    //  const token = jwt.sign({ email: parsedInput.data.email, isVerified:false}, JWT_SECRET, { expiresIn: "1m" });
+    //  const token = jwt.sign({ email: parsedInput.data.email, isVerified:false}, process.env.JWT_SECRET, { expiresIn: "1m" });
     //  const msg = {
     //    to: parsedInput.data.email,
     //    from: "riyanahmed1703@gmail.com",
@@ -44,7 +43,7 @@ app.post("/signup", async (req, res) => {
       password: securePassword,
       isVerified: false,
     });
-    const token = jwt.sign({ email: parsedInput.data.email, isVerified:false}, JWT_SECRET, { expiresIn: "1m" });
+    const token = jwt.sign({ email: parsedInput.data.email, isVerified:false}, process.env.JWT_SECRET, { expiresIn: "1m" });
     const msg = {
       to: parsedInput.data.email,
       from: "riyanahmed1703@gmail.com",
@@ -66,7 +65,7 @@ app.get("/verify/:token", async (req, res) => {
   const email = jwt.decode(token).email;
   
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await Users.findOne({ email });
     
@@ -74,7 +73,7 @@ app.get("/verify/:token", async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
     await Users.updateOne({ email }, { isVerified: true });
-    const newToken = jwt.sign({ email: decoded.email, isVerified: true }, JWT_SECRET);
+    const newToken = jwt.sign({ email: decoded.email, isVerified: true }, process.env.JWT_SECRET);
 
     res.status(200).json({ message: "Email verified successfully", token: newToken });
   } catch (error) {
@@ -119,7 +118,7 @@ app.post("/signin",  async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ email: parsedInput.data.email, isVerified:true }, JWT_SECRET, { expiresIn: "5d" });
+    const token = jwt.sign({ email: parsedInput.data.email, isVerified:true }, process.env.JWT_SECRET, { expiresIn: "5d" });
     
     res.status(200).json({ message: "User signed in successfully", token });
   } catch (err) {
