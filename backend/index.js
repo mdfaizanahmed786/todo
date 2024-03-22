@@ -12,7 +12,7 @@ const { enterTodo, userValidation } = require("./inputvalidation");
 app.use(cors());
 app.use(express.json());
 const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_APIKEY);
 
 app.post("/signup", async (req, res) => {
   try {
