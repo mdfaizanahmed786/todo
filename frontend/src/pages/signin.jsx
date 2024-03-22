@@ -49,7 +49,6 @@ export default function Signin() {
         </label>
         <input   
           type="email"
-          type="email"
           id="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}

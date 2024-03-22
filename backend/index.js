@@ -1,8 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "helloworld";
 const bcrypt = require("bcrypt");
+
 const userAuthenticate = require("./userauth");
 const cors = require("cors");
 const { Todos, Users } = require("./db");
@@ -11,7 +13,7 @@ const { enterTodo, userValidation } = require("./inputvalidation");
 app.use(cors());
 app.use(express.json());
 const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey("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");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 app.post("/signup", async (req, res) => {
   try {
