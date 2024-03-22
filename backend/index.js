@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_APIKEY);
+const PORT=process.env.PORT || 5000
 
 app.post("/signup", async (req, res) => {
   try {
@@ -190,6 +191,6 @@ app.put("/update/:id", userAuthenticate, async (req, res) => {
   }
 });
 
-app.listen(5000 || process.env.PORT, () => {
-  console.log("Server Started on port 5000");
+app.listen(PORT, () => {
+  console.log("Server Started on port"+PORT);
 });
