@@ -11,7 +11,6 @@ const { Todos, Users } = require("./db");
 const { enterTodo, userValidation } = require("./inputvalidation");
 app.use(cors());
 app.use(express.json());
-console.log(process.env.SENDGRID_APIKEY)
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_APIKEY);
 const PORT=process.env.PORT || 5000
@@ -45,12 +44,12 @@ app.post("/signup", async (req, res) => {
       password: securePassword,
       isVerified: false,
     });
-    const token = jwt.sign({ email: parsedInput.data.email, isVerified:false}, process.env.JWT_SECRET, { expiresIn: "1m" });
+    const token = jwt.sign({ email: parsedInput.data.email, isVerified:false}, process.env.JWT_SECRET, { expiresIn: "3m" });
     const msg = {
       to: parsedInput.data.email,
       from: "riyanahmed1703@gmail.com",
       subject: "Verify your email",
-      html: `<h2>Click on the link to verify your email to continue using your todo app this will expire in 1 minute</h2><a href="http://localhost:5173/verify/${token}">Click here</a>`,
+      html: `<h2>Click on the link to verify your email to continue using your todo app/h2><a href="https://todo-plum-one.vercel.app/verify/${token}">Click here</a>`,
     };
 
     await sgMail.send(msg);
