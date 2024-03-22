@@ -21,7 +21,7 @@ function App() {
             {/* Render other components here if needed */}
           </Route>
           <Route path ="/verify/:token" element={<Verify/>}/>
-          <Route path="/signup" element={<Signup />} />
+          <Route path="https://todo-plum-one.vercel.app/signup" element={<Signup />} />
           <Route path="/notFound" element={<NotFound/>} />
           <Route path="/todos" element={<Todos />} />
           <Route path="/signin" element={<Signin />} />
