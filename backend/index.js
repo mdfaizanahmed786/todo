@@ -11,6 +11,7 @@ const { Todos, Users } = require("./db");
 const { enterTodo, userValidation } = require("./inputvalidation");
 app.use(cors());
 app.use(express.json());
+console.log(process.env.SENDGRID_APIKEY)
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_APIKEY);
 const PORT=process.env.PORT || 5000
@@ -58,7 +59,7 @@ app.post("/signup", async (req, res) => {
     return res.status(200).json({ message: "User signed up successfully and email send successfully", token });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ message: "Internal server error"});
+    return res.status(500).json({error: "Error sending email", details: err.message});
   }
 });
 app.get("/verify/:token", async (req, res) => {
