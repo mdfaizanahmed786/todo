@@ -49,7 +49,7 @@ app.post("/signup", async (req, res) => {
       to: parsedInput.data.email,
       from: "riyanahmed1703@gmail.com",
       subject: "Verify your email",
-      html: `<h2>Click on the link to verify your email to continue using your todo app</h2><a href="https://todo-i1p4.onrender.com/verify/${token}">Click here</a>`,
+      html: `<h2>Click on the link to verify your email to continue using your todo app</h2><a href="https://todo-plum-one.vercel.app/verify/${token}">Click here</a>`,
     };
 
     await sgMail.send(msg);
