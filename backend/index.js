@@ -190,6 +190,6 @@ app.put("/update/:id", userAuthenticate, async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
+app.listen(5000 || process.env.PORT, () => {
   console.log("Server Started on port 5000");
 });
