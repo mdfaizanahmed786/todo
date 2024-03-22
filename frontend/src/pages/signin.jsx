@@ -11,7 +11,7 @@ export default function Signin() {
   const submitHandler = async () => {
     try {
       if(email === "" || password === "") return alert("Please fill all the fields")
-      const response = await fetch("http://localhost:5000/signin", {
+      const response = await fetch("https://todo-i1p4.onrender.com/signin", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

@@ -81,7 +81,7 @@ export function CreateTodos({ todos, fetcher }) {
           }}
           onClick={() => {
             if (title.length === 0 || description.length === 0) return;
-            fetch("http://localhost:5000/todo", {
+            fetch("https://todo-i1p4.onrender.com/todo", {
               method: "POST",
               body: JSON.stringify({
                 title,

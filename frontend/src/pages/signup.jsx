@@ -27,7 +27,7 @@ export default function Signup() {
     if (password.length < 8) return alert("Password must be at least 8 characters long");
 
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("https://todo-i1p4.onrender.com/signup", {
         method: "POST",
         body: JSON.stringify({
           username,

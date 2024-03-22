@@ -16,7 +16,7 @@ function Todos() {
   const fetcher = useCallback(async (token) => {
     try {
       //  console.log(locationToken, isToken);
-      const response = await fetch("http://localhost:5000/todos", {
+      const response = await fetch("https://todo-i1p4.onrender.com/todos", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,7 +64,7 @@ function Todos() {
     }
     if (!window.confirm("Are you sure you want to delete this todo?")) return;
     setModal(false);
-    fetch(`http://localhost:5000/delete/${id}`, {
+    fetch(`https://todo-i1p4.onrender.com/delete/${id}`, {
       method: "POST",
       body: JSON.stringify({
         id,
@@ -93,7 +93,7 @@ function Todos() {
         return;
 
       setModal(false);
-      fetch(`http://localhost:5000/update/${toEditedID}`, {
+      fetch(`https://todo-i1p4.onrender.com/update/${toEditedID}`, {
         method: "PUT",
         body: JSON.stringify({
           title,
